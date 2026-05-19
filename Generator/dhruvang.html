@@ -1,52 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
-  <title> Quang's yearbook </title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta property="og:site_name" content="Quang's yearbook">
-  <meta property="og:title" content="Quang's yearbook" />
-  <meta property="og:image" content="https://dhruvang-vidhi.firebaseapp.com/images/couple.jpg">
-  <meta property="og:type" content="website" />
-  <meta property="og:updated_time" content="1546232947" />
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:700" rel="stylesheet">
-  <link rel="shortcut icon" href="../images/favicon.ico" />
+  <title>Canteen Smart Ordering</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
+<body class="bg-gray-100">
 
-<body>
-  <style>
-    *{ font-weight: 700; font-family: 'Open Sans', sans-serif; color: rgb(4, 36, 47); } 
-    *:focus { outline: none; } 
-    body { background: linear-gradient(to bottom, #8c7a7a 0%, #af877c 65%, #af877c 100%) fixed; background: url(../images/background.jpg) no-repeat center center fixed; background-size: cover; font: 14px/20px; font-family: 'Charm', cursive; margin-top: 30px; color: #FBDE79; } 
-    .formBox { display: inline-block; font-size: 0; width: 100%; text-align: center; margin: 15px 0; } 
-    .formBox input { border: none; background-color: transparent; border: 2px solid #FBDE79; padding: 10px;} 
-    .formBox button { background-color: #FBDE79; padding: 10px; border: 2px solid #FBDE79; width: 100px; }
-  </style>
-  <div class="formBox">
-    <input type="text" name="name" id="name">
-    <button id="generate" type="button">Create</button>
-  </div>
-  <div class="formBox">
-    <button class="copy" onclick="copytoclip()">Copy</button>
-    <input type="text" name="link" id="link" readonly>
+<div class="max-w-4xl mx-auto p-4">
+  <h1 class="text-3xl font-bold mb-4">🍱 Smart Canteen</h1>
+
+  <!-- Menu -->
+  <div id="menu" class="grid grid-cols-2 gap-4"></div>
+
+  <!-- Cart -->
+  <div class="mt-6">
+    <h2 class="text-xl font-semibold">🛒 Your Order</h2>
+    <ul id="cart"></ul>
+    <p id="total" class="font-bold"></p>
   </div>
 
+  <!-- Calorie -->
+  <div class="mt-4">
+    <h2 class="text-xl font-semibold">🔥 Total Calories</h2>
+    <p id="calories"></p>
+  </div>
 
-  <script>
-    function copytoclip() {
-      var copyText = document.getElementById("link");
-      copyText.select();
-      document.execCommand("copy");
-    }
-    (function () {
-      document.getElementById("generate").addEventListener("click", function () {
-        document.getElementById("link").value = "https://dhruvang-vidhi.ga/?name=" + btoa(document.getElementById("name").value).replace(/=/g, '');
-      });
-    })();
-  </script>
+  <!-- Mini Game -->
+  <div class="mt-6">
+    <button onclick="spinWheel()" class="bg-blue-500 text-white px-4 py-2 rounded">🎁 Spin for Discount</button>
+    <p id="discount"></p>
+  </div>
+</div>
+
+<script>
+const foods = [
+  {name: "Fried Rice", price: 30000, cal: 500},
+  {name: "Pho", price: 40000, cal: 450},
+  {name: "Banh Mi", price: 20000, cal: 350},
+  {name: "Salad", price: 25000, cal: 200}
+];
+
+let cart = [];
+let discount = 0;
+
+function renderMenu(){
+  const menuDiv = document.getElementById("menu");
+  foods.forEach((food, index) => {
+    const div = document.createElement("div");
+    div.className = "bg-white p-4 rounded shadow";
+    div.innerHTML = `
+      <h3 class="font-bold">${food.name}</h3>
+      <p>${food.price} VND</p>
+      <p>${food.cal} cal</p>
+      <button onclick="addToCart(${index})" class="mt-2 bg-green-500 text-white px-2 py-1 rounded">Add</button>
+    `;
+    menuDiv.appendChild(div);
+  });
+}
+
+function addToCart(index){
+  cart.push(foods[index]);
+  renderCart();
+}
+
+function renderCart(){
+  const cartList = document.getElementById("cart");
+  cartList.innerHTML = "";
+  let total = 0;
+  let calories = 0;
+
+  cart.forEach(item => {
+    const li = document.createElement("li");
+    li.textContent = item.name + " - " + item.price + " VND";
+    cartList.appendChild(li);
+    total += item.price;
+    calories += item.cal;
+  });
+
+  total = total * (1 - discount);
+
+  document.getElementById("total").textContent = "Total: " + total + " VND";
+  document.getElementById("calories").textContent = calories + " cal";
+}
+
+function spinWheel(){
+  const discounts = [0, 0.1, 0.2];
+  discount = discounts[Math.floor(Math.random() * discounts.length)];
+  document.getElementById("discount").textContent = "Discount: " + (discount*100) + "%";
+  renderCart();
+}
+
+// Auto theme (simple)
+function setTheme(){
+  const month = new Date().getMonth();
+  if(month >= 5 && month <= 8){
+    document.body.className = "bg-green-100";
+  } else {
+    document.body.className = "bg-blue-100";
+  }
+}
+
+setTheme();
+renderMenu();
+</script>
+
 </body>
-
 </html>
+cdn.tailwindcss.com
