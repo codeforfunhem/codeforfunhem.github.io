@@ -1,150 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
-  <title>Quang's yearbook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta property="og:site_name" content="Quang's yearbook">
-  <meta property="og:title" content="Quang's yearbook" />
-  <meta property="og:image" content="https://dhruvang-vidhi.ga/images/couple.jpg">
-  <meta property="og:type" content="website" />
-  <meta property="og:updated_time" content="1546232947" />
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-  <link rel='stylesheet' href='https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css'>
-  <link href="https://fonts.googleapis.com/css?family=Charm|Open+Sans:400,700" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="shortcut icon" href="images/favicon.ico" />
+  <title>Canteen Smart Ordering</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
+<body class="bg-gray-100">
 
-<body>
-  <canvas></canvas>
-  <div id="overlay" class="overlay">
-    <div class="info">
-      <div class="head">Graduate Party Invitation</div>
-      <img src="images/mail.svg" alt="couple" width="100">
-      <p>Loading...</p>
-    </div>
+<div class="max-w-4xl mx-auto p-4">
+  <h1 class="text-3xl font-bold mb-4">🍱 Smart Canteen</h1>
+
+  <!-- Menu -->
+  <div id="menu" class="grid grid-cols-2 gap-4"></div>
+
+  <!-- Cart -->
+  <div class="mt-6">
+    <h2 class="text-xl font-semibold">🛒 Your Order</h2>
+    <ul id="cart"></ul>
+    <p id="total" class="font-bold"></p>
   </div>
 
-  <div class="slide-container">
-    <div class="wrapper">
-      <div class="clash-card barbarian">
-        <div class="leaf"></div>
-        <div class="letter-box">
-          <div class="invitee">Dear,<span class="my friend"></span></div>
-          <div class="invitation">December 22nd, 2024</div>
-          <div class="inviters">Quang</div>
-          <div class="invitation">Invite you to his<br />yearbook session</div>
-        </div>
-        <button class="nextBtn">Next <img src="images/next.svg" alt="next" width="12"></button>
-      </div>
-    </div>
-    <div class="wrapper">
-      <div class="clash-card barbarian">
-        <button class="prevBtn"><img src="images/prev.svg" alt="Previous" width="12"> Prev</button>
-        <div class="leaf"></div>
-        <div class="letter-box">
-          <div class="wrap-box">
-            <span class="label-box">Friends</span>
-          </div>
-          <div class="wrap-box">
-            <i class="heart"><img src="images/heart.svg" alt="heart"></i>
-            <ul class="timeline">
-              <li>
-                <div class="left icon"><img src="images/ganesh.png" alt="ganesh" width="50"></div>
-                <div class="right text">
-                  <div class="timeline-time">10:00 am</div>
-                  <div class="timeline-title">Building A<br />Han Thuyen High School</div>
-                </div>
-              </li>
-            </ul>
-            <i class="i-heart"><img src="images/heart.svg" alt="heart"></i>
-          </div>
-        </div>
-        <button class="nextBtn">Next <img src="images/next.svg" alt="next" width="12"></button>
-      </div>
-    </div>
-    <div class="wrapper">
-      <div class="clash-card barbarian">
-        <button class="prevBtn"><img src="images/prev.svg" alt="Previous" width="12"> Prev</button>
-        <div class="leaf"></div>
-        <div class="letter-box">
-          <div class="wrap-box">
-            <span class="label-box">Family members</span>
-          </div>
-          <div class="wrap-box">
-            <i class="heart"><img src="images/heart.svg" alt="heart"></i>
-            <ul class="timeline">
-              <li>
-                <div class="left icon"><img src="images/camera.svg" alt="ganesh" width="50"></div>
-                <div class="right text">
-                  <div class="timeline-time">11:00 am</div>
-                  <div class="timeline-title">Han Thuyen High School</div>
-                </div>
-              </li>
-              
-            </ul>
-            <i class="i-heart"><img src="images/heart.svg" alt="heart"></i>
-          </div>
-        </div>
-        <button class="nextBtn">Next <img src="images/next.svg" alt="next" width="12"></button>
-      </div>
-    </div>
-    <div class="wrapper">
-      <div class="clash-card barbarian">
-        <button class="prevBtn"><img src="images/prev.svg" alt="Previous" width="12"> Prev</button>
-        <div class="leaf"></div>
-        <div class="letter-box">
-          <div class="wrap-box">
-            <span class="label-box">Venue</span>
-          </div>
-          <div class="wrap-box">
-            <div class="address">Han Thuyen, Dai Phuc,<br />Bac Ninh.<br /><br />or<br /></div>
-          </div>
-          <div class="wrap-box">
-            <a class="label-box" target="_blank" href="https://maps.app.goo.gl/FwUC7yxoWFSpDxdi7">Find the Direction</a>
-          </div>
-          <div class="wrap-box">
-            <a class="label-box" href="tel:+84 972189616">Call Me</a>
-          </div>
-        </div>
-        <button class="nextBtn">Next <img src="images/next.svg" alt="next" width="12"></button>
-      </div>
-    </div>
-    <div class="wrapper">
-      <div class="clash-card barbarian">
-        <button class="prevBtn"><img src="images/prev.svg" alt="Previous" width="12"> Prev</button>
-        <div class="leaf"></div>
-        <div class="letter-box">
-          <div class="wrap-box">
-            
-            <div class="last">Glad to have your appearance</div>
-           
-          </div>
-          <div class="wrap-box">
-            <div class="Hashs">
-              I suggest you to use<br />
-              <span onclick="copyToClipboard('MemoryLane')">#MemoryLane</span>
-              <span onclick="copyToClipboard('QuangChronicles')">#QuangChronicles</span><br/>
-              <span onclick="copyToClipboard('YearbookMoments')">#YearbookMoments</span>
-              <br />Tags for Social Media Sharing.
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <!-- Calorie -->
+  <div class="mt-4">
+    <h2 class="text-xl font-semibold">🔥 Total Calories</h2>
+    <p id="calories"></p>
   </div>
-  <div id="snackbar">Copied</div>
-  <div class="hideFromUser">
-    <input type="text" id="MemoryLane" value="MemoryLane">
-    <input type="text" id="QuangChronicles" value="QuangChronicles">
-    <input type="text" id="YearbookMoments" value="YearbookMoments">
+
+  <!-- Mini Game -->
+  <div class="mt-6">
+    <button onclick="spinWheel()" class="bg-blue-500 text-white px-4 py-2 rounded">🎁 Spin for Discount</button>
+    <p id="discount"></p>
   </div>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
-  <script src='https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js'></script>
-  <script src="js/index.js"></script>
+</div>
+
+<script>
+const foods = [
+  {name: "Fried Rice", price: 30000, cal: 500},
+  {name: "Pho", price: 40000, cal: 450},
+  {name: "Banh Mi", price: 20000, cal: 350},
+  {name: "Salad", price: 25000, cal: 200}
+];
+
+let cart = [];
+let discount = 0;
+
+function renderMenu(){
+  const menuDiv = document.getElementById("menu");
+  foods.forEach((food, index) => {
+    const div = document.createElement("div");
+    div.className = "bg-white p-4 rounded shadow";
+    div.innerHTML = `
+      <h3 class="font-bold">${food.name}</h3>
+      <p>${food.price} VND</p>
+      <p>${food.cal} cal</p>
+      <button onclick="addToCart(${index})" class="mt-2 bg-green-500 text-white px-2 py-1 rounded">Add</button>
+    `;
+    menuDiv.appendChild(div);
+  });
+}
+
+function addToCart(index){
+  cart.push(foods[index]);
+  renderCart();
+}
+
+function renderCart(){
+  const cartList = document.getElementById("cart");
+  cartList.innerHTML = "";
+  let total = 0;
+  let calories = 0;
+
+  cart.forEach(item => {
+    const li = document.createElement("li");
+    li.textContent = item.name + " - " + item.price + " VND";
+    cartList.appendChild(li);
+    total += item.price;
+    calories += item.cal;
+  });
+
+  total = total * (1 - discount);
+
+  document.getElementById("total").textContent = "Total: " + total + " VND";
+  document.getElementById("calories").textContent = calories + " cal";
+}
+
+function spinWheel(){
+  const discounts = [0, 0.1, 0.2];
+  discount = discounts[Math.floor(Math.random() * discounts.length)];
+  document.getElementById("discount").textContent = "Discount: " + (discount*100) + "%";
+  renderCart();
+}
+
+// Auto theme (simple)
+function setTheme(){
+  const month = new Date().getMonth();
+  if(month >= 5 && month <= 8){
+    document.body.className = "bg-green-100";
+  } else {
+    document.body.className = "bg-blue-100";
+  }
+}
+
+setTheme();
+renderMenu();
+</script>
+
 </body>
-
 </html>
+cdn.tailwindcss.com
